@@ -3,16 +3,16 @@
 *{box-sizing:border-box}body{margin:0;background:#faf7f0;color:#30263e;font:16px/1.6 system-ui,sans-serif}header,main{max-width:1050px;margin:auto;padding:20px}header{display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;align-items:center}header strong{font-size:21px}a{color:#5e417e}nav a{margin-left:15px}.hero{background:linear-gradient(115deg,#e9ddf9,#f6eafa);border-radius:28px;padding:36px;display:flex;justify-content:space-between;align-items:center;gap:16px}.hero h1{font-size:clamp(30px,5vw,52px);margin:0;line-height:1.2}.hero p{margin-bottom:0}.sun{background:#f9efca;border-radius:50%;width:105px;height:105px;display:grid;place-items:center;font-size:48px;flex:none;color:#755d37}.grid{display:grid;grid-template-columns:1.15fr 1fr;gap:18px;margin-top:18px}section.card{background:#fffdf9;border:1px solid #e9e0eb;border-radius:24px;padding:23px}h2,h3{margin:0 0 10px}fieldset{border:0;padding:0;margin:12px 0}legend{font-weight:600;margin-bottom:8px}label.chip,button{display:inline-block;border:1px solid #ddd1e7;border-radius:30px;padding:7px 13px;margin:2px;background:#f8f1fc;color:inherit;cursor:pointer;font:inherit}.chip:has(input:checked){background:#e5d3f8;border-color:#8962a7}.chip input{accent-color:#765094}textarea{width:100%;padding:12px;border:1px solid #ddd1e7;border-radius:13px;font:inherit;resize:vertical}button.primary{background:#62447f;color:white;border-color:#62447f}small,.muted{color:#63566e}.bars{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:6px;text-align:center;align-items:end;font-size:12px;margin:15px 0}.track{height:72px;background:#f7f1fa;border-radius:8px;display:flex;align-items:end;overflow:hidden}.fill{width:100%;background:#b28bd3}.actions{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}.action{background:#f5ecfa;border-radius:16px;padding:16px}.action.recommended{outline:2px solid #9f78bf}.action p{margin:6px 0}article{border-top:1px solid #eee5ef;padding:9px 0;overflow-wrap:anywhere}#care{margin-top:18px}footer{padding:16px 0}@media(max-width:700px){.grid,.actions{grid-template-columns:1fr}.hero{padding:22px}.sun{width:60px;height:60px;font-size:30px}}
 </style>
 <header><strong>✿ 心情小站</strong><nav aria-label="页面导航"><a href="#record">记录</a><a href="#review">回顾</a><a href="#care">关怀</a></nav></header>
-<main><div class="hero"><div><h1>今天，你感觉怎么样？</h1><p>记下心情，给自己一点时间。</p></div><div class="sun" aria-hidden="true">✿</div></div>
+<main><div class="hero"><div><h1>今天，你感觉怎么样？</h1><p>今天也可以慢慢来。</p></div><div class="sun" aria-hidden="true">✿</div></div>
 <div class="grid"><section class="card" id="record"><h2>记下此刻</h2><form id="entry">
 <fieldset><legend>此刻的情绪</legend><div id="moods"></div></fieldset>
 <fieldset><legend>情绪有多强烈？</legend><label>轻微 <input id="intensity" type="range" min="1" max="5" value="3" aria-label="情绪强度"> 强烈</label> <output id="strength">3 / 5</output></fieldset>
 <fieldset><legend>它和什么有关？ <small>可多选</small></legend><div id="tags"></div></fieldset>
 <label for="note">想多写一句吗？ <small>选填</small></label><textarea id="note" rows="2" maxlength="300" placeholder="刚刚发生了什么？"></textarea><button class="primary">保存记录</button><p id="saved" role="status"></p></form></section>
 <section class="card" id="review"><h2>最近七天</h2><button id="demo">查看示例</button><p class="muted" id="chart-label">每天记录的平均情绪强度</p><div class="bars" id="bars" aria-labelledby="chart-label"></div><p id="insight"></p><h3>日记记录</h3><div id="history"></div></section></div>
-<section class="card" id="care"><h2>给自己一点关怀</h2><p id="hint" class="muted"></p><div class="actions" id="actions"></div><p id="timer" role="status"></p><button id="stop" hidden>结束练习</button><div id="feedback" hidden>现在感觉怎么样？ <button type="button">轻松一点</button><button type="button">差不多</button><button type="button">更难受了</button></div><p id="feedback-status" role="status"></p></section>
+<section class="card" id="care"><h2>给自己一点关怀</h2><p id="hint" class="muted"></p><div class="actions" id="actions"></div><div id="guide" hidden></div><p id="timer"></p><button id="stop" hidden>结束练习</button><div id="feedback" hidden>现在感觉怎么样？ <button type="button">轻松一点</button><button type="button">差不多</button><button type="button">更难受了</button></div><p id="feedback-status" role="status"></p></section>
 <footer><small>日记保存在当前浏览器。</small> <button id="clear">清除日记</button></footer></main>
-<style>[hidden]{display:none!important}</style>
+<style>[hidden]{display:none!important}.action a,.action button{display:block;width:100%;text-align:left;background:#fffafc;border:1px solid #e6d7ef;border-radius:12px;padding:8px 10px;margin:6px 0;text-decoration:none;font-size:.9rem}.action a:hover,.action button:hover{background:#ebdaf7}#guide{margin-top:16px;padding:16px;background:#f9f2fc;border-radius:15px}#guide select{font:inherit;padding:5px;border:1px solid #ddd1e7;border-radius:8px;margin-right:6px}#guide a{display:inline-block;margin-left:12px;font-size:.875rem}</style>
 <script>
 const $=id=>document.getElementById(id);
 const moods=['开心','平静','焦虑','疲惫','低落','烦躁'];
@@ -39,26 +39,100 @@ $('demo').textContent=demo?'返回我的日记':'查看示例';
 $('history').replaceChildren(...data.slice(0,10).map(r=>{const el=document.createElement('article');const title=document.createElement('strong');title.textContent=r.mood+' '+r.strength+'/5';const meta=document.createElement('div');meta.textContent=r.date+(r.tags.length?' · '+r.tags.join('、'):'');el.append(title,meta);if(r.note){const note=document.createElement('div');note.textContent=r.note;el.append(note)}return el}));
 const latest=data[0];
 const recommended=latest?({焦虑:0,烦躁:2,疲惫:2,低落:1,开心:1,平静:0})[latest.mood]:null;
-$('hint').textContent=latest?(demo?'按示例记录':'按最近一次记录')+'推荐，也可以自由选择。':'任选一个当下做得到的小行动。';
+$('hint').textContent=latest?(demo?'按示例记录':'按最近一次记录')+'推荐，也可以自由选择。':'挑一个现在想试的，小小一步就好。';
 document.querySelectorAll('.action').forEach((el,i)=>{el.classList.toggle('recommended',i===recommended);el.querySelector('small').textContent=i===recommended?'推荐':''});
 }
 $('intensity').oninput=()=>{$('strength').value=$('intensity').value+' / 5'};
 $('entry').onsubmit=e=>{e.preventDefault();const form=new FormData(e.currentTarget);const next=[{date:day(0),mood:form.get('mood'),strength:Number($('intensity').value),tags:form.getAll('tag'),note:$('note').value.trim()},...records];try{localStorage.setItem(key,JSON.stringify(next))}catch{$('saved').textContent='浏览器暂时无法保存，请检查存储设置。';return}records=next;demo=false;e.currentTarget.reset();$('intensity').oninput();$('saved').textContent='已保存，七天回顾已更新。';render()};
 $('demo').onclick=()=>{demo=!demo;render()};
 $('clear').onclick=()=>{if(records.length&&confirm('清除当前浏览器里的全部日记？')){try{localStorage.removeItem(key)}catch{$('saved').textContent='清除失败，请检查浏览器存储设置。';return}records=[];demo=false;$('saved').textContent='日记已清除。';render()}};
-const actions=[['呼吸冥想','放松肩膀，按舒服的节奏自然呼吸。',60],['听一段音乐','播放一段轻柔的旋律，把注意力放在声音上。',45],['起身活动','轻轻转动肩膀，或起身走几步。',180]];
+const actions=[
+  {title:'☁️ 冥想小窝', items:[
+    ['温柔呼吸',300,['坐稳，双脚着地，放松肩膀。','轻轻用鼻子吸气，再用嘴缓缓呼气。','如果舒服，吸气和呼气各默数到五。'],'https://www.nhs.uk/mental-health/self-help/guides-tools-and-activities/breathing-exercises-for-stress/'],
+    ['身体扫描',300,['坐好或躺下，先感受身体与椅子或地面的接触。','从脚趾往上移动注意力，经过双腿、躯干、双手和脸。','留意温度、触感或紧张。走神时，轻轻回到正在感受的位置。'],'https://www.guysandstthomas.nhs.uk/health-information/mindfulness-based-stress-reduction-mbsr/mbsr-exercises'],
+    ['聆听此刻',180,['找个舒服的姿势，留意身边最清楚的声音。','再听一听远处的声音，让它们自然来去。','走神时，把注意力轻轻带回耳边的声音。'],'https://www.nhs.uk/mental-health/self-help/tips-and-support/mindfulness/']
+  ]},
+  {title:'🎧 心情歌单', items:[
+    ['月光钢琴 · 安静放空','https://open.spotify.com/playlist/37i9dQZF1DX4sWSpwq3LiO'],
+    ['窗边节拍 · 专注陪伴','https://open.spotify.com/playlist/37i9dQZF1DWWQRwui0ExPn'],
+    ['晴天补给 · 轻快充电','https://open.spotify.com/playlist/37i9dQZF1DX3rxVfibe1L0']
+  ]},
+  {title:'🌱 今日动一动', items:[
+    ['散步透气',300,['找一段平坦的路，用舒服的速度走五分钟。']],
+    ['走跑交替',600,['先走五分钟热身，再做两组「慢跑 1 分钟＋走路 90 秒」。结束后继续缓步放松。'],'https://www.nhs.uk/better-health/get-active/get-running-with-couch-to-5k/'],
+    ['跟练瑜伽','https://www.nhs.uk/live-well/exercise/pilates-and-yoga/yoga-with-lj/']
+  ]}
+];
 let tick,audio;
-function finish(message){clearInterval(tick);if(audio){audio.close().catch(()=>{});audio=null}$('timer').textContent=message;$('stop').hidden=true;$('feedback').hidden=false}
-function start(i){
-clearInterval(tick);if(audio){audio.close().catch(()=>{});audio=null}
-$('feedback').hidden=true;$('feedback-status').textContent='';$('stop').hidden=false;
-const [name,,duration]=actions[i];const end=Date.now()+duration*1000;
-if(i===1&&window.AudioContext){audio=new AudioContext();const notes=[261.63,329.63,392,440,392,329.63,293.66,261.63];for(let n=0;n<30;n++){const t=audio.currentTime+n*1.5;const tone=audio.createOscillator();const gain=audio.createGain();tone.type='sine';tone.frequency.value=notes[n%notes.length];gain.gain.setValueAtTime(.001,t);gain.gain.exponentialRampToValueAtTime(.085,t+.18);gain.gain.exponentialRampToValueAtTime(.001,t+1.45);tone.connect(gain).connect(audio.destination);tone.start(t);tone.stop(t+1.48)}}
-const update=()=>{const left=Math.ceil((end-Date.now())/1000);if(left<=0){finish('练习完成。');return}$('timer').textContent=name+' · 剩余 '+left+' 秒'};
-update();tick=setInterval(update,1000);
+function silence(){if(audio){audio.close().catch(()=>{});audio=null}}
+function atmosphere(kind){
+  silence();
+  if(!kind||!window.AudioContext)return;
+  const ctx=audio=new AudioContext();
+  const buffer=ctx.createBuffer(1,ctx.sampleRate*8,ctx.sampleRate);
+  const data=buffer.getChannelData(0);
+  for(let i=0;i<data.length;i++) data[i]=Math.random()*2-1;
+  const noise=ctx.createBufferSource(),filter=ctx.createBiquadFilter(),volume=ctx.createGain();
+  noise.buffer=buffer;noise.loop=true;filter.type='lowpass';filter.frequency.value={rain:3200,river:780,birds:500}[kind];
+  volume.gain.value=0.13;noise.connect(filter).connect(volume).connect(ctx.destination);noise.start();
+  if(kind==='birds'){
+    for(let i=0;i<90;i++){
+      const t=ctx.currentTime+1+i*4+Math.random();
+      const chirp=ctx.createOscillator(),gain=ctx.createGain();
+      chirp.frequency.setValueAtTime(1550,t);chirp.frequency.exponentialRampToValueAtTime(3000,t+.14);
+      gain.gain.setValueAtTime(.001,t);gain.gain.linearRampToValueAtTime(.035,t+.04);gain.gain.exponentialRampToValueAtTime(.001,t+.20);
+      chirp.connect(gain).connect(ctx.destination);chirp.start(t);chirp.stop(t+.22);
+    }
+  }
 }
-for(const [i,[name,desc,time]] of actions.entries()){
-const card=document.createElement('div');card.className='action';card.innerHTML='<small></small><h3>'+name+'</h3><p>'+desc+'</p><button type="button">开始 · '+(time>=60?time/60+' 分钟':time+' 秒')+'</button>';card.querySelector('button').onclick=()=>start(i);$('actions').append(card)
+function finish(message){clearInterval(tick);silence();$('timer').textContent=message;$('stop').hidden=true;$('feedback').hidden=false}
+function start(item,sound){
+  clearInterval(tick);silence();$('feedback').hidden=true;$('feedback-status').textContent='';$('stop').hidden=false;
+  try{atmosphere(sound)}catch{silence()}
+  const [name,duration]=item,end=Date.now()+duration*1000;
+  const update=()=>{
+    const left=Math.ceil((end-Date.now())/1000);
+    if(left<=0){finish('练习完成。给自己一个小小的拥抱。');return}
+    let phase='';
+    if(name==='走跑交替'&&left<=300)phase=' · '+((300-left)%150<60?'轻轻慢跑':'走一走');
+    else if(name==='走跑交替')phase=' · 步行热身';
+    $('timer').textContent=name+phase+' · '+Math.floor(left/60)+':'+String(left%60).padStart(2,'0');
+  };
+  update();tick=setInterval(update,1000);
+}
+function openGuide(group,item){
+  clearInterval(tick);silence();$('timer').textContent='';$('stop').hidden=true;$('feedback').hidden=true;$('feedback-status').textContent='';
+  const guide=$('guide');guide.replaceChildren();guide.hidden=false;
+  const heading=document.createElement('h3');heading.textContent=item[0];guide.append(heading);
+  const steps=document.createElement('ol');
+  for(const line of item[2]){const step=document.createElement('li');step.textContent=line;steps.append(step)}
+  guide.append(steps);
+  const button=document.createElement('button');button.className='primary';button.textContent='开始 · '+item[1]/60+' 分钟';
+  let sound;
+  if(group===0){
+    const label=document.createElement('label');label.textContent='氛围声 ';
+    sound=document.createElement('select');sound.setAttribute('aria-label','氛围声');
+    for(const [value,name] of [['','安静陪伴'],['birds','林间来信 · 鸟鸣'],['river','溪水写诗 · 流水'],['rain','云边小雨 · 雨声']])sound.add(new Option(name,value));
+    label.append(sound);guide.append(label);
+    sound.onchange=()=>{try{atmosphere(sound.value);if(!$('stop').hidden)return;clearTimeout(sound.preview);sound.preview=setTimeout(()=>{if($('stop').hidden)silence()},8000)}catch{silence()}};
+  }
+  button.onclick=()=>start(item,sound?.value);guide.append(button);
+  if(item[3]){
+    const source=document.createElement('a');source.href=item[3];source.target='_blank';source.rel='noopener';source.textContent='查看 NHS 指南 ↗';guide.append(source);
+  }
+  guide.scrollIntoView({block:'nearest'});
+}
+for(const [group,{title,items}] of actions.entries()){
+  const card=document.createElement('div');card.className='action';card.innerHTML='<small></small><h3></h3>';card.querySelector('h3').textContent=title;
+  for(const item of items){
+    const external=typeof item[1]==='string';
+    const control=document.createElement(external?'a':'button');
+    control.textContent=item[0]+(external?' ↗':'');
+    if(external){control.href=item[1];control.target='_blank';control.rel='noopener'}
+    else{control.type='button';control.onclick=()=>openGuide(group,item)}
+    card.append(control);
+  }
+  $('actions').append(card);
 }
 $('stop').onclick=()=>finish('练习已结束。');
 $('feedback').onclick=e=>{if(e.target.tagName==='BUTTON'){$('feedback').hidden=true;$('feedback-status').textContent='这次练习后的感受：'+e.target.textContent+'。'}};
